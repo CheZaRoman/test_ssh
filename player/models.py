@@ -4,7 +4,7 @@ from django.db import models
 
 class Author(models.Model):
     name = models.CharField(max_length=100)
-    date_created = models.DateField()
+    date_created = models.DateField(auto_now_add=True)
     test_field = models.TextField(blank=True)
 
 
