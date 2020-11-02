@@ -4,8 +4,8 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework.response import Response
 
-from player.models import Author
-from player.serializers import AuthorSerializer, AuthorSerialzierGet
+from player.models import Author, Statistic
+from player.serializers import AuthorSerializer, AuthorSerialzierGet, StatisticSerializer, StatisticSerializerGet
 from rest_framework.views import APIView
 
 class AuthorApiView(APIView):
@@ -19,3 +19,26 @@ class AuthorApiView(APIView):
 
     def get(self, request):
         return Response(AuthorSerializer(Author.objects.all(), many=True).data)
+
+
+class StatisticView(APIView):
+
+    def post(self, request):
+        serializer = StatisticSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance = serializer.save()
+        # instance = Author.objects.create(**request.data)
+        return Response(StatisticSerializer(instance).data)
+
+    def put(self, request):
+        serializer_get = StatisticSerializerGet(data=request.GET)
+        serializer_get.is_valid(raise_exception=True)
+        statistic_instance = Statistic.objects.get(pk=request.GET.get('pk'))
+        serializer_update = StatisticSerializer(instance=statistic_instance,
+                                                data=request.data)
+        serializer_update.is_valid(raise_exception=True)
+        instance = serializer_update.save()
+        return Response(data=StatisticSerializer(instance).data)
+
+    def get(self, request):
+        return Response(StatisticSerializer(Statistic.objects.last()).data)
