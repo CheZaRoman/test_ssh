@@ -3,11 +3,30 @@ from rest_framework.exceptions import ValidationError
 
 from player.models import Song, Author, Statistic
 
+class StatisticSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    result = serializers.JSONField(required=True)
+    email = serializers.EmailField(required=True)
+    datetime_create = serializers.DateTimeField(required=False, read_only=True)
+    datetime_update = serializers.DateTimeField(required=False, read_only=True)
+
+    def create(self, validated_data):
+        return Statistic.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        # instance.result = validated_data.get('result')
+        # instance.email = validated_data.get('email')
+        # instance.save()
+        print(12312432342)
+        Statistic.objects.filter(id=instance.id).update(**validated_data)
+        return instance
+
 
 class AuthorSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=50)
     test_field = serializers.CharField(max_length=255)
+    #statistic = StatisticSerializer()
 
     def create(self, validated_data):
         return Author.objects.create(**validated_data)
@@ -27,28 +46,12 @@ class AuthorSerialzierGet(serializers.Serializer):
             raise ValidationError(detail="Object not found")
 
 
-class StatisticSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    result = serializers.JSONField(required=True)
-    email = serializers.EmailField(required=True)
-    datetime_create = serializers.DateTimeField(required=False, read_only=True)
-    datetime_update = serializers.DateTimeField(required=False, read_only=True)
-
-    def create(self, validated_data):
-        return Statistic.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        instance.result = validated_data.get('result')
-        instance.email = validated_data.get('email')
-        instance.save()
-        return instance
-
 
 class StatisticSerializerGet(serializers.Serializer):
-    pk = serializers.IntegerField(required=True)
+    id = serializers.IntegerField(required=True)
 
     def validate(self, attrs):
-        if Statistic.objects.filter(pk=attrs.get('pk')).exists():
+        if Statistic.objects.filter(id=attrs.get('id')).exists():
             return attrs
         else:
             raise ValidationError('Statistic not found')

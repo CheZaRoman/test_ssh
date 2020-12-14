@@ -1,3 +1,5 @@
+import json
+
 from django import views
 from django.shortcuts import render
 
@@ -18,12 +20,16 @@ class AuthorApiView(APIView):
         return Response(AuthorSerializer(instance).data)
 
     def get(self, request):
-        return Response(AuthorSerializer(Author.objects.all(), many=True).data)
+        print(request.data)
+        print(request.GET)
+        print('HERE')
+        return Response({"response": 200, "data": 111})
 
 
 class StatisticView(APIView):
 
     def post(self, request):
+
         serializer = StatisticSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         instance = serializer.save()
@@ -33,7 +39,7 @@ class StatisticView(APIView):
     def put(self, request):
         serializer_get = StatisticSerializerGet(data=request.GET)
         serializer_get.is_valid(raise_exception=True)
-        statistic_instance = Statistic.objects.get(pk=request.GET.get('pk'))
+        statistic_instance = Statistic.objects.get(id=request.GET.get('id'))
         serializer_update = StatisticSerializer(instance=statistic_instance,
                                                 data=request.data)
         serializer_update.is_valid(raise_exception=True)
@@ -41,4 +47,5 @@ class StatisticView(APIView):
         return Response(data=StatisticSerializer(instance).data)
 
     def get(self, request):
+
         return Response(StatisticSerializer(Statistic.objects.last()).data)
