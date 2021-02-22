@@ -1,35 +1,44 @@
-# def factorial(n):
-#     res = 1
-#     for i in range(1,n+1):
-#         res *= i
+# a = [1,2,3,4,5,6,7,8,9]
 #
-#     return res
+# for item in a:
+#     print(item)
 #
-# print(factorial(5))
+# range(10) # 0 - 9
+#
+# for i in range(10+1):
+#     print(i)
+#
+# range(1,10)
+#
+# for i in range(1,10,2):
+#     print(i)
+#
+# range(1,10,2)
+
+# import random
+# for i in range(11):
+#     print(random.randint(1,25))
+#
+# a = 0
+# while True:
+#     a += 1
+#     print(a)
 
 
-class Parser:
+number = int(input())
+result = 1
+# for i in range(1, number+1):
+#     result *= i
+#
+# print(result)
 
-    def __init__(self, url):
-        self.url = url
-        self.page = None
-        self.data = None
-
-    def __get_html_page(self):
-        print('__get_html_page')
-        self.page = "HTML page"
-
-    def __parse(self):
-        print('__parse')
-        self.data = {"data": 1234}
-
-    def run(self):
-        self.__get_html_page()
-        self.__parse()
+# while number > 0:
+#     result *= number
+#     number -= 1
+# print(result)
 
 
-
-
-p = Parser('www.google.com')
-p.run()
-print(p.data)
+for i in range(100):
+    if i == 56:
+        break
+    print(i)
