@@ -1,0 +1,8 @@
+1. Реализовать класс Note;
+* add_person(Person);
+* remove_person(index);
+* update_person(index, **info)
+* get_info_note()
+class Person:
+* update(**info)
+* get_info()
