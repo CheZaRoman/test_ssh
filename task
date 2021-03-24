@@ -1,0 +1,16 @@
+1. Реализовать класс Note;
+* add_person(Person);
+* remove_person(index);
+* update_person(index, **info)
+* get_info_note()
+class Person:
+* update(**info)
+* get_info()
+
+
+# Создать класс Car, Driver, Engine
+* класс Car содержит в качестве полей Driver, Engine, марку автомобиля, метод print_info() -
+выводит всю информацию о машине её двигателе и драйвере
+* класс Engine методы запуска мотора и остановки мотора, поворота налево и направо (выводят действие)
+* класс Driver - ФИО водителя, стаж
+
