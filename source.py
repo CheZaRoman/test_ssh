@@ -1,77 +1,45 @@
+class UnAcceptedValueError(Exception):
+    def __init__(self, data):
+        self.data = data
+
+    def __str__(self):
+        return repr(self.data)
+
 class Person:
-    def __init__(self, name, age):
-        self.__name = name
-        self.__age = age
+    def __init__(self, name: str, age: str):
+        if name.isdigit():
+            raise UnAcceptedValueError('Name has nums')
+        else:
+            self.name = name
 
-    def update(self, **kwargs):
-        if kwargs.get('name'):
-            self.__name = kwargs['name']
-        if kwargs.get('age'):
-            self.__age = kwargs['age']
+        if not age.isdigit():
+            raise UnAcceptedValueError('age is not integer')
+        else:
+            self.age = int(age)
 
-    def get_info(self):
-        return "{}, age: {}".format(self.__name, self.__age)
+def input_func():
+    name1 = input('Input name for first person: ')
+    name2 = input('Input name for second person: ')
+    age1 = input('Input age for first person: ')
+    age2 = input('Input age for second person: ')
+    return name1, name2, age1, age2
 
-class Note:
+def create_two_persons(name1, name2, age1, age2):
+    person = Person(name1, age1)
+    person2 = Person(name2, age2)
+    return person, person2
 
-    def __init__(self):
-        self.__note_list = list()
+name1,name2, age1, age2 = input_func()
 
-    def add(self, person):
-        self.__note_list.append(person)
-
-    def remove(self, index):
-        if 0 <= index <= len(self.__note_list)-1:
-            self.__note_list.remove(self.__note_list[index])
-
-    def update(self, index, **kwargs):
-        if 0 <= index <= len(self.__note_list)-1:
-            person = self.__note_list[index]
-            person.update(**kwargs)
-
-    def get_info_note(self):
-        result = list()
-        for i in self.__note_list:
-            result.append(i.get_info())
-        return result
-
-
-class EmployeeNote(Note):
-
-    def nothing(self):
-        return 0
-n = Note()
-e = EmployeeNote()
-p1 = Person('Ivan', 24)
-p2 = Person('Ivan1', 23)
-p3 = Person('Ivan2', 25)
-p4 = Person('Ivan3', 26)
-print('Note')
-n.add(p1)
-n.add(p2)
-n.add(p3)
-n.add(p4)
-print(n.get_info_note())
-
-n.remove(2)
-print(n.get_info_note())
-
-n.update(1, name='Jon', age=15, surname='RRR')
-print(n.get_info_note())
-print('EmployeeNote')
-e.add(p1)
-e.add(p2)
-e.add(p3)
-e.add(p4)
-print(e.get_info_note())
-
-e.remove(2)
-print(e.get_info_note())
-
-e.update(1, name='Jon', age=15, surname='RRR')
-print(e.get_info_note())
+def rec_func(name1,name2, age1, age2, ):
+    while True:
+        try:
+            p1, p2 = create_two_persons(name1, name2, age1, age2)
+            return p1, p2
+        except UnAcceptedValueError:
+            print('Incorrect')
+            name1, name2, age1, age2 = input_func()
+            rec_func(name1, name2, age1, age2)
 
 
-class Computer:
-    def __init__(self, processor, motherboard, graphic_card):
-        pass
+print(rec_func(name1, name2, age1, age2))
