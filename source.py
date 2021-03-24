@@ -29,7 +29,7 @@ def create_two_persons(name1, name2, age1, age2):
     person2 = Person(name2, age2)
     return person, person2
 
-name1,name2, age1, age2 = input_func()
+#name1,name2, age1, age2 = input_func()
 
 def rec_func(name1,name2, age1, age2, ):
     while True:
@@ -42,4 +42,33 @@ def rec_func(name1,name2, age1, age2, ):
             rec_func(name1, name2, age1, age2)
 
 
-print(rec_func(name1, name2, age1, age2))
+#print(rec_func(name1, name2, age1, age2))
+
+class UserContextManager:
+    def __init__(self, name):
+        self.name = name
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print('Exit from context manager')
+
+
+    def __enter__(self):
+        print('Enter into context manager')
+        return self
+
+# user = UserContextManager()
+# with UserContextManager(name="222") as user:
+#     print('suite')
+#     print('....')
+#     print(100/0)
+#     print(user.name)
+#     print('....')
+#     print('end suite')
+#
+# print('-----------------')
+# with open('newfile.txt', 'x', encoding='utf-8') as g:
+#     d = int(input())
+#     print('1 / {} = {}'.format(d, 1 / d), file=g)
+
+f = open('newfile.txt')
+print(f.readlines())
