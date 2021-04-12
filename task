@@ -1,16 +1,55 @@
-1. Реализовать класс Note;
-* add_person(Person);
-* remove_person(index);
-* update_person(index, **info)
-* get_info_note()
-class Person:
-* update(**info)
-* get_info()
+# 1. Дана строка содержащая числа, вывести строку содержащую только эти цифры
+в том же порядке что и в строке
+# 2. Дан geojson, результат список словарей ключи тип геометрии, значения координаты.
+
+ываы23куркагукрукоп2р42342р3п423
+23242...
+
+a = [1,2,3,4,5]
+a = a.append(6)
+print(a)
+
+d = {1:1, 2:2, 2:3, 2:4}
+print(d)
+d.get(1, 3)
+d[2]
+
+def func(*args, **kwags):
+    pass
 
 
-# Создать класс Car, Driver, Engine
-* класс Car содержит в качестве полей Driver, Engine, марку автомобиля, метод print_info() -
-выводит всю информацию о машине её двигателе и драйвере
-* класс Engine методы запуска мотора и остановки мотора, поворота налево и направо (выводят действие)
-* класс Driver - ФИО водителя, стаж
+func(1,2,3,4,5,6,7)
+func(1,2,2,4,5,6, k=100, b=200)
 
+
+class MC:
+    def __init__(self):
+        pass
+
+    def __enter__(self):
+        return self
+
+    def __exit__(exc, msg, *args, **kwargs):
+        pass
+
+
+with MC() as mc:
+    // code1
+// code2
+
+def func():
+    for i in range(10):
+       if i%2==0:
+        return
+       else:
+        print(i)
+
+func()
+
+try:
+    //code
+except Exception:
+    // code
+
+finally:
+    //
